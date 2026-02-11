@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BrandCraft</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-purple': '#6B46C1',
+            'brand-purple-dark': '#553C9A',
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 min-h-screen font-sans antialiased">
+
+<div class="flex h-screen overflow-hidden">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="hidden md:block w-72 bg-white border-r border-gray-200 flex flex-col">
+    <!-- Brand + Quick Nav -->
+    <div class="flex-shrink-0">
+      <div class="p-5 pb-1">
+        <h1 class="text-2xl font-bold text-brand-purple tracking-tight">BrandCBrandCraft</h1>
+      </div>
+
+      <nav class="px-3 pb-5 space-y-0.5 border-b border-gray-200">
+        <a href="#" class="flex items-center px-3 py-2.5 text-gray-700 hover:bg-gray-100 rounded-lg text-sm font-medium">
+          <i class="fa-solid fa-house mr-3 w-5"></i>Home
+        </a>
+        <a href="#" class="flex items-center px-3 py-2.5 text-gray-700 hover:bg-gray-100 rounded-lg text-sm font-medium">
+          <i class="fa-solid fa-folder mr-3 w-5"></i>Projects
+        </a>
+        <a href="#" class="flex items-center px-3 py-2.5 text-gray-700 hover:bg-gray-100 rounded-lg text-sm font-medium">
+          <i class="fa-solid fa-gear mr-3 w-5"></i>Settings
+        </a>
+        <a href="#" class="flex items-center px-3 py-2.5 text-gray-700 hover:bg-gray-100 rounded-lg text-sm font-medium">
+          <i class="fa-solid fa-lightbulb mr-3 w-5"></i>Prolabs
+        </a>
+        <a href="#" class="flex items-center px-3 py-2.5 text-gray-700 hover:bg-gray-100 rounded-lg text-sm font-medium">
+          <i class="fa-solid fa-circle-question mr-3 w-5"></i>Help
+        </a>
+      </nav>
+    </div>
+
+    <!-- Your Chats -->
+    <div class="flex-1 flex flex-col min-h-0">
+      <div class="p-4 border-b border-gray-200 flex-shrink-0">
+        <div class="flex items-center justify-between">
+          <h3 class="text-base font-semibold text-gray-900">Your chats</h3>
+          <button id="new-chat-btn" class="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-brand-purple hover:text-brand-purple-dark bg-brand-purple/5 hover:bg-brand-purple/15 rounded-lg transition">
+            <i class="fa-solid fa-plus text-xs"></i>New Chat
+          </button>
+        </div>
+      </div>
+
+      <div id="chat-history-list" class="flex-1 overflow-y-auto px-3 py-2 space-y-1">
+        <button data-chat-id="1" class="chat-item active">
+          <i class="fa-regular fa-comment-dots text-gray-500 text-lg flex-shrink-0 mt-0.5"></i>
+          <div class="flex-1 min-w-0">
+            <div class="font-medium text-gray-900 text-sm truncate">Eco Fitness App Idea</div>
+            <div class="text-xs text-gray-500">2 days ago • 8 messages</div>
+          </div>
+        </button>
+
+        <button data-chat-id="2" class="chat-item">
+          <i class="fa-regular fa-comment-dots text-gray-500 text-lg flex-shrink-0 mt-0.5"></i>
+          <div class="flex-1 min-w-0">
+            <div class="font-medium text-gray-900 text-sm truncate">Minecraft Tutorial Brand</div>
+            <div class="text-xs text-gray-500">5 days ago • 12 messages</div>
+          </div>
+        </button>
+
+        <button data-chat-id="3" class="chat-item">
+          <i class="fa-regular fa-comment-dots text-gray-500 text-lg flex-shrink-0 mt-0.5"></i>
+          <div class="flex-1 min-w-0">
+            <div class="font-medium text-gray-900 text-sm truncate">New Coffee Shop Logo</div>
+            <div class="text-xs text-gray-500">1 week ago • 5 messages</div>
+          </div>
+        </button>
+
+        <button data-chat-id="4" class="chat-item">
+          <i class="fa-regular fa-comment-dots text-gray-500 text-lg flex-shrink-0 mt-0.5"></i>
+          <div class="flex-1 min-w-0">
+            <div class="font-medium text-gray-900 text-sm truncate">Social Captions for Fashion</div>
+            <div class="text-xs text-gray-500">2 weeks ago • 15 messages</div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT - Chat Area -->
+  <main class="flex-1 flex flex-col overflow-hidden bg-gray-50">
+    <div class="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-8">
+      <div class="w-full max-w-3xl">
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 flex flex-col h-full">
+
+          <!-- Header -->
+          <div class="bg-gradient-to-r from-brand-purple to-brand-purple-dark px-6 py-5 text-white">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+              </div>
+              <div>
+                <h2 class="text-xl font-bold">BrandCraft AI</h2>
+                <p class="text-sm text-purple-100">Build your brand, name, logo, thumbnails & more</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Messages -->
+          <div id="chat-messages" 
+               class="p-6 space-y-6 flex-1 overflow-y-auto min-h-[300px] max-h-[65vh] md:max-h-[75vh] scrollbar-thin scrollbar-thumb-brand-purple/50 scrollbar-track-gray-100">
+            <!-- Welcome message -->
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-full bg-brand-purple flex items-center justify-center text-white flex-shrink-0">
+                <i class="fa-solid fa-robot text-lg"></i>
+              </div>
+              <div class="bg-gray-100 rounded-2xl rounded-tl-none px-5 py-4 max-w-[85%]">
+                <p>Hi 👋 I'm your Brand assistant.<br>Choose a feature on the right or tell me about your idea (e.g., "Eco-friendly fitness app for women" or "Minecraft gaming tutorial").</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Input -->
+          <div class="border-t border-gray-200 p-5">
+            <div class="relative">
+              <input id="idea-input" type="text" placeholder="Describe your brand / video idea..." 
+                     class="w-full pl-5 pr-14 py-4 bg-gray-50 border border-gray-300 rounded-full focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple text-gray-800 placeholder-gray-500 transition">
+              <button id="send-btn" class="absolute right-3 top-1/2 -translate-y-1/2 bg-brand-purple text-white p-3 rounded-full hover:bg-brand-purple-dark transition">
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- RIGHT SIDEBAR - Features -->
+  <aside class="hidden lg:block w-80 bg-white border-l border-gray-200 flex-shrink-0 overflow-y-auto">
+    <div class="p-6">
+      
+
+      <h3 class="text-xl font-bold text-gray-900 mb-6">What would you like to create?</h3>
+
+      <div class="space-y-4">
+        
+  <!-- Brand Name – now with icon -->
+  <button data-feature="brand-name" class="feature-btn">
+    <div class="flex items-center gap-4 w-full">
+      <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 text-2xl font-bold flex-shrink-0">
+        <i class="fa-solid fa-font"></i> <!-- Icon: text/font style -->
+      </div>
+      <div class="flex-1">
+        <div class="font-semibold text-gray-900">Brand Name</div>
+        <div class="text-sm text-gray-600">Creative name ideas</div>
+      </div>
+    </div>
+  </button>
+
+  <!-- Tagline / Slogan – now with icon -->
+  <button data-feature="tagline" class="feature-btn">
+    <div class="flex items-center gap-4 w-full">
+      <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center text-purple-600 text-2xl flex-shrink-0">
+        <i class="fa-solid fa-quote-left"></i> <!-- Icon: quotation marks -->
+      </div>
+      <div class="flex-1">
+        <div class="font-semibold text-gray-900">Tagline / Slogan</div>
+        <div class="text-sm text-gray-600">Catchy & memorable</div>
+      </div>
+    </div>
+  </button>
+
+  <!-- Logo (already had icon) -->
+  <button data-feature="logo" class="feature-btn">
+    <div class="flex items-center gap-4 w-full">
+      <div class="w-12 h-12 rounded-xl bg-pink-50 flex items-center justify-center text-pink-600 text-2xl flex-shrink-0">
+        <i class="fa-solid fa-palette"></i>
+      </div>
+      <div class="flex-1">
+        <div class="font-semibold text-gray-900">Logo</div>
+        <div class="text-sm text-gray-600">Custom visual identity</div>
+      </div>
+    </div>
+  </button>
+
+  <!-- Social Media Captions -->
+  <button data-feature="social-captions" class="feature-btn">
+    <div class="flex items-center gap-4 w-full">
+      <div class="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 text-2xl flex-shrink-0">
+        <i class="fa-brands fa-instagram"></i>
+      </div>
+      <div class="flex-1">
+        <div class="font-semibold text-gray-900">Social Media Captions</div>
+        <div class="text-sm text-gray-600">Instagram, X, TikTok...</div>
+      </div>
+    </div>
+  </button>
+
+  <!-- YouTube Thumbnails -->
+  <button data-feature="thumbnails" class="feature-btn">
+    <div class="flex items-center gap-4 w-full">
+      <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-orange-600 text-2xl flex-shrink-0">
+        <i class="fa-solid fa-image"></i>
+      </div>
+      <div class="flex-1">
+        <div class="font-semibold text-gray-900">YouTube Thumbnails</div>
+        <div class="text-sm text-gray-600">Click-worthy designs</div>
+      </div>
+    </div>
+  </button>
+
+  <!-- Full Brand Kit -->
+  <button data-feature="full-brand" class="feature-btn">
+    <div class="flex items-center gap-4 w-full">
+      <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center text-purple-700 text-2xl flex-shrink-0">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+      </div>
+      <div class="flex-1">
+        <div class="font-semibold text-purple-700">Full Brand Kit</div>
+        <div class="text-sm text-purple-600">Name + Logo + Tagline + More</div>
+      </div>
+    </div>
+  </button>
+</div>
+    </div>
+  </aside>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
